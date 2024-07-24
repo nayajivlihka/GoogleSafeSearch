@@ -8,7 +8,7 @@ fi
 
 # Step 1: Ping forcesafesearch.google.com to get the IP address
 echo "Getting the IP address for forcesafesearch.google.com..."
-IPAddress=$(ping -c 1 forcesafesearch.google.com | grep -oP 'PING.*?\(\K[\d.]+')
+IPAddress=$(ping forcesafesearch.google.com -4 -c 1 | grep -oP 'PING.*?\(\K[\d.]+')
 
 # Confirm IP address was retrieved
 if [[ -z "$IPAddress" ]]; then
