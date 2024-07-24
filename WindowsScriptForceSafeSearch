@@ -236,5 +236,22 @@ REM Cleanup
 del %tempHostsFile%
 
 echo Entries added successfully. SafeSearch should now be enforced.
+
+:: Define search engines to block
+set "search_engines=search.yahoo.com bing.com yandex.com duckduckgo.com ask.com aol.com baidu.com qwant.com startpage.com searx.me ecosia.org gibiru.com dogpile.com webcrawler.com lycos.com metacrawler.com altavista.com savvy.com cha-cha.com search.com find.com goggles.com snap.com gigablast.com boardreader.com walla.com search.ru search.aol.co.uk search.naver.com search.daum.net search.sina.com.cn search.weibo.com search.navercorp.com search.soso.com search.kakao.com search.t.co search.myway.com search.orange.fr search.yahoo.co.jp search.google.co.in"
+
+:: Backup the current hosts file
+copy C:\Windows\System32\drivers\etc\hosts C:\Windows\System32\drivers\etc\hosts.bak
+
+:: Add entries to redirect search engines to 127.0.0.1
+echo Redirecting search engines to 127.0.0.1...
+
+:: Loop through each search engine and add an entry to the hosts file
+for %%d in (%search_engines%) do (
+    echo 127.0.0.1 %%d >> C:\Windows\System32\drivers\etc\hosts
+)
+
+echo Entries added successfully. All specified search engines are now blocked.
+
 endlocal
 pause
