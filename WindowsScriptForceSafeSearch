@@ -1,0 +1,240 @@
+@echo off
+setlocal enabledelayedexpansion
+
+REM Step 1: Run Notepad as Administrator
+echo Starting Notepad as Administrator to edit hosts file...
+start "" /w notepad.exe C:\Windows\System32\drivers\etc\hosts
+
+REM Step 2: Ping forcesafesearch.google.com to get the IP address
+echo Getting the IP address for forcesafesearch.google.com...
+for /f "tokens=2 delims=[]" %%i in ('ping -n 1 forcesafesearch.google.com ^| find "Pinging"') do set IPAddress=%%i
+
+REM Confirm IP address was retrieved
+if "!IPAddress!"=="" (
+    echo Could not retrieve IP address. Exiting.
+    exit /b 1
+)
+
+echo Retrieved IP address: !IPAddress!
+
+REM Step 3: Append entries to hosts file
+echo Adding entries to hosts file...
+
+REM Use a temporary file for appending to hosts
+set tempHostsFile=%TEMP%\hosts.tmp
+
+REM Copy current hosts file to temp file
+copy C:\Windows\System32\drivers\etc\hosts %tempHostsFile% > nul
+
+REM Add the new entries for all Google country domains
+(
+echo !IPAddress! www.google.ac #forcesafesearch
+echo !IPAddress! www.google.ad #forcesafesearch
+echo !IPAddress! www.google.ae #forcesafesearch
+echo !IPAddress! www.google.com.af #forcesafesearch
+echo !IPAddress! www.google.com.ag #forcesafesearch
+echo !IPAddress! www.google.com.ai #forcesafesearch
+echo !IPAddress! www.google.al #forcesafesearch
+echo !IPAddress! www.google.am #forcesafesearch
+echo !IPAddress! www.google.co.ao #forcesafesearch
+echo !IPAddress! www.google.com.ar #forcesafesearch
+echo !IPAddress! www.google.as #forcesafesearch
+echo !IPAddress! www.google.at #forcesafesearch
+echo !IPAddress! www.google.com.au #forcesafesearch
+echo !IPAddress! www.google.az #forcesafesearch
+echo !IPAddress! www.google.ba #forcesafesearch
+echo !IPAddress! www.google.com.bd #forcesafesearch
+echo !IPAddress! www.google.be #forcesafesearch
+echo !IPAddress! www.google.bf #forcesafesearch
+echo !IPAddress! www.google.bg #forcesafesearch
+echo !IPAddress! www.google.com.bh #forcesafesearch
+echo !IPAddress! www.google.bi #forcesafesearch
+echo !IPAddress! www.google.bj #forcesafesearch
+echo !IPAddress! www.google.com.bn #forcesafesearch
+echo !IPAddress! www.google.com.bo #forcesafesearch
+echo !IPAddress! www.google.com.br #forcesafesearch
+echo !IPAddress! www.google.bs #forcesafesearch
+echo !IPAddress! www.google.bt #forcesafesearch
+echo !IPAddress! www.google.co.bw #forcesafesearch
+echo !IPAddress! www.google.by #forcesafesearch
+echo !IPAddress! www.google.com.bz #forcesafesearch
+echo !IPAddress! www.google.ca #forcesafesearch
+echo !IPAddress! www.google.com.kh #forcesafesearch
+echo !IPAddress! www.google.cc #forcesafesearch
+echo !IPAddress! www.google.cd #forcesafesearch
+echo !IPAddress! www.google.cf #forcesafesearch
+echo !IPAddress! www.google.cat #forcesafesearch
+echo !IPAddress! www.google.cg #forcesafesearch
+echo !IPAddress! www.google.ch #forcesafesearch
+echo !IPAddress! www.google.ci #forcesafesearch
+echo !IPAddress! www.google.co.ck #forcesafesearch
+echo !IPAddress! www.google.cl #forcesafesearch
+echo !IPAddress! www.google.cm #forcesafesearch
+echo !IPAddress! www.google.cn #forcesafesearch
+echo !IPAddress! www.g.cn #forcesafesearch
+echo !IPAddress! www.google.com.co #forcesafesearch
+echo !IPAddress! www.google.co.cr #forcesafesearch
+echo !IPAddress! www.google.com.cu #forcesafesearch
+echo !IPAddress! www.google.cv #forcesafesearch
+echo !IPAddress! www.google.com.cy #forcesafesearch
+echo !IPAddress! www.google.cz #forcesafesearch
+echo !IPAddress! www.google.de #forcesafesearch
+echo !IPAddress! www.google.dj #forcesafesearch
+echo !IPAddress! www.google.dk #forcesafesearch
+echo !IPAddress! www.google.dm #forcesafesearch
+echo !IPAddress! www.google.com.do #forcesafesearch
+echo !IPAddress! www.google.dz #forcesafesearch
+echo !IPAddress! www.google.com.ec #forcesafesearch
+echo !IPAddress! www.google.ee #forcesafesearch
+echo !IPAddress! www.google.com.eg #forcesafesearch
+echo !IPAddress! www.google.es #forcesafesearch
+echo !IPAddress! www.google.com.et #forcesafesearch
+echo !IPAddress! www.google.fi #forcesafesearch
+echo !IPAddress! www.google.com.fj #forcesafesearch
+echo !IPAddress! www.google.fm #forcesafesearch
+echo !IPAddress! www.google.fr #forcesafesearch
+echo !IPAddress! www.google.ga #forcesafesearch
+echo !IPAddress! www.google.ge #forcesafesearch
+echo !IPAddress! www.google.gf #forcesafesearch
+echo !IPAddress! www.google.gg #forcesafesearch
+echo !IPAddress! www.google.com.gh #forcesafesearch
+echo !IPAddress! www.google.com.gi #forcesafesearch
+echo !IPAddress! www.google.gl #forcesafesearch
+echo !IPAddress! www.google.gm #forcesafesearch
+echo !IPAddress! www.google.gp #forcesafesearch
+echo !IPAddress! www.google.gr #forcesafesearch
+echo !IPAddress! www.google.com.gt #forcesafesearch
+echo !IPAddress! www.google.gy #forcesafesearch
+echo !IPAddress! www.google.com.hk #forcesafesearch
+echo !IPAddress! www.google.hn #forcesafesearch
+echo !IPAddress! www.google.hr #forcesafesearch
+echo !IPAddress! www.google.ht #forcesafesearch
+echo !IPAddress! www.google.hu #forcesafesearch
+echo !IPAddress! www.google.co.id #forcesafesearch
+echo !IPAddress! www.google.iq #forcesafesearch
+echo !IPAddress! www.google.ie #forcesafesearch
+echo !IPAddress! www.google.co.il #forcesafesearch
+echo !IPAddress! www.google.im #forcesafesearch
+echo !IPAddress! www.google.co.in #forcesafesearch
+echo !IPAddress! www.google.is #forcesafesearch
+echo !IPAddress! www.google.it #forcesafesearch
+echo !IPAddress! www.google.je #forcesafesearch
+echo !IPAddress! www.google.com.jm #forcesafesearch
+echo !IPAddress! www.google.jo #forcesafesearch
+echo !IPAddress! www.google.co.jp #forcesafesearch
+echo !IPAddress! www.google.co.ke #forcesafesearch
+echo !IPAddress! www.google.ki #forcesafesearch
+echo !IPAddress! www.google.kg #forcesafesearch
+echo !IPAddress! www.google.co.kr #forcesafesearch
+echo !IPAddress! www.google.com.kw #forcesafesearch
+echo !IPAddress! www.google.kz #forcesafesearch
+echo !IPAddress! www.google.la #forcesafesearch
+echo !IPAddress! www.google.com.lb #forcesafesearch
+echo !IPAddress! www.google.com.lc #forcesafesearch
+echo !IPAddress! www.google.li #forcesafesearch
+echo !IPAddress! www.google.lk #forcesafesearch
+echo !IPAddress! www.google.co.ls #forcesafesearch
+echo !IPAddress! www.google.lt #forcesafesearch
+echo !IPAddress! www.google.lu #forcesafesearch
+echo !IPAddress! www.google.lv #forcesafesearch
+echo !IPAddress! www.google.com.ly #forcesafesearch
+echo !IPAddress! www.google.co.ma #forcesafesearch
+echo !IPAddress! www.google.md #forcesafesearch
+echo !IPAddress! www.google.me #forcesafesearch
+echo !IPAddress! www.google.mg #forcesafesearch
+echo !IPAddress! www.google.mk #forcesafesearch
+echo !IPAddress! www.google.ml #forcesafesearch
+echo !IPAddress! www.google.com.mm #forcesafesearch
+echo !IPAddress! www.google.mn #forcesafesearch
+echo !IPAddress! www.google.ms #forcesafesearch
+echo !IPAddress! www.google.com.mt #forcesafesearch
+echo !IPAddress! www.google.mu #forcesafesearch
+echo !IPAddress! www.google.mv #forcesafesearch
+echo !IPAddress! www.google.mw #forcesafesearch
+echo !IPAddress! www.google.com.mx #forcesafesearch
+echo !IPAddress! www.google.com.my #forcesafesearch
+echo !IPAddress! www.google.co.mz #forcesafesearch
+echo !IPAddress! www.google.com.na #forcesafesearch
+echo !IPAddress! www.google.ne #forcesafesearch
+echo !IPAddress! www.google.com.nf #forcesafesearch
+echo !IPAddress! www.google.com.ng #forcesafesearch
+echo !IPAddress! www.google.com.ni #forcesafesearch
+echo !IPAddress! www.google.nl #forcesafesearch
+echo !IPAddress! www.google.no #forcesafesearch
+echo !IPAddress! www.google.com.np #forcesafesearch
+echo !IPAddress! www.google.nr #forcesafesearch
+echo !IPAddress! www.google.nu #forcesafesearch
+echo !IPAddress! www.google.co.nz #forcesafesearch
+echo !IPAddress! www.google.com.om #forcesafesearch
+echo !IPAddress! www.google.com.pk #forcesafesearch
+echo !IPAddress! www.google.com.pa #forcesafesearch
+echo !IPAddress! www.google.com.pe #forcesafesearch
+echo !IPAddress! www.google.com.ph #forcesafesearch
+echo !IPAddress! www.google.pl #forcesafesearch
+echo !IPAddress! www.google.com.pg #forcesafesearch
+echo !IPAddress! www.google.pn #forcesafesearch
+echo !IPAddress! www.google.co.pn #forcesafesearch
+echo !IPAddress! www.google.com.pr #forcesafesearch
+echo !IPAddress! www.google.ps #forcesafesearch
+echo !IPAddress! www.google.pt #forcesafesearch
+echo !IPAddress! www.google.com.py #forcesafesearch
+echo !IPAddress! www.google.com.qa #forcesafesearch
+echo !IPAddress! www.google.ro #forcesafesearch
+echo !IPAddress! www.google.rs #forcesafesearch
+echo !IPAddress! www.google.ru #forcesafesearch
+echo !IPAddress! www.google.rw #forcesafesearch
+echo !IPAddress! www.google.com.sa #forcesafesearch
+echo !IPAddress! www.google.com.sb #forcesafesearch
+echo !IPAddress! www.google.sc #forcesafesearch
+echo !IPAddress! www.google.se #forcesafesearch
+echo !IPAddress! www.google.com.sg #forcesafesearch
+echo !IPAddress! www.google.sh #forcesafesearch
+echo !IPAddress! www.google.si #forcesafesearch
+echo !IPAddress! www.google.sk #forcesafesearch
+echo !IPAddress! www.google.com.sl #forcesafesearch
+echo !IPAddress! www.google.sn #forcesafesearch
+echo !IPAddress! www.google.sm #forcesafesearch
+echo !IPAddress! www.google.so #forcesafesearch
+echo !IPAddress! www.google.st #forcesafesearch
+echo !IPAddress! www.google.sr #forcesafesearch
+echo !IPAddress! www.google.com.sv #forcesafesearch
+echo !IPAddress! www.google.td #forcesafesearch
+echo !IPAddress! www.google.tg #forcesafesearch
+echo !IPAddress! www.google.co.th #forcesafesearch
+echo !IPAddress! www.google.com.tj #forcesafesearch
+echo !IPAddress! www.google.tk #forcesafesearch
+echo !IPAddress! www.google.tl #forcesafesearch
+echo !IPAddress! www.google.tm #forcesafesearch
+echo !IPAddress! www.google.to #forcesafesearch
+echo !IPAddress! www.google.tn #forcesafesearch
+echo !IPAddress! www.google.com.tr #forcesafesearch
+echo !IPAddress! www.google.tt #forcesafesearch
+echo !IPAddress! www.google.com.tw #forcesafesearch
+echo !IPAddress! www.google.co.tz #forcesafesearch
+echo !IPAddress! www.google.com.ua #forcesafesearch
+echo !IPAddress! www.google.co.ug #forcesafesearch
+echo !IPAddress! www.google.co.uk #forcesafesearch
+echo !IPAddress! www.google.com #forcesafesearch
+echo !IPAddress! www.google.com.uy #forcesafesearch
+echo !IPAddress! www.google.co.uz #forcesafesearch
+echo !IPAddress! www.google.com.vc #forcesafesearch
+echo !IPAddress! www.google.co.ve #forcesafesearch
+echo !IPAddress! www.google.vg #forcesafesearch
+echo !IPAddress! www.google.co.vi #forcesafesearch
+echo !IPAddress! www.google.com.vn #forcesafesearch
+echo !IPAddress! www.google.vu #forcesafesearch
+echo !IPAddress! www.google.ws #forcesafesearch
+echo !IPAddress! www.google.co.za #forcesafesearch
+echo !IPAddress! www.google.co.zm #forcesafesearch
+echo !IPAddress! www.google.co.zw #forcesafesearch
+) >> %tempHostsFile%
+
+REM Overwrite the original hosts file with the temp file
+copy /y %tempHostsFile% C:\Windows\System32\drivers\etc\hosts > nul
+
+REM Cleanup
+del %tempHostsFile%
+
+echo Entries added successfully. SafeSearch should now be enforced.
+endlocal
+pause
